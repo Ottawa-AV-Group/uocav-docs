@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 # Welcome!
 This page will provide a high level overview of the system and the interaction between software and hardware to make the autonomous system run.
 It may be overwhelming at first but following the documentation and researching piece by piece will provide you with an indepth, if not,
@@ -17,15 +19,15 @@ Similar to the robot created in the video, we are following essentially doing th
     encoders so we are using the CUI Devices AMT encoders to track the position of the wheels.
 <br/>
 The diagram below is a high level overview of the different hardware components and their communication
-![Hardware Component Diagram](/Hardware_Interaction_Diagram.png)
+<Image src="/Hardware_Interaction_Diagram.png" alt="Hardware Component Diagram"/>
 
 <br/>
 This diagram displays the various ROS nodes that will be running in our system. It is hiding a lot of details, espicially in the slam_toolbox and nav2
 components but it provides a general overview.
-![ROS Software Components](/Capstone_Package_View.png)
+<Image src="/Capstone_Package_View.png" alt="ROS Software Components"/>
 <br/>
 The last diagram shows the interaction between the hardware and software that we have.
-![Software and Hardware Interaction Diagram](/Hardware_Interaction_Diagram.png)
+<Image src="/Hardware_Interaction_Diagram.png" alt="Software and Hardware Interaction Diagram"/>
 
 <br/>
 This is a lot to take in when you are just coming in, but take your time and just be consistent. Continue to watch the videos and understand 
