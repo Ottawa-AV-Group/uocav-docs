@@ -1,0 +1,34 @@
+# Welcome!
+This page will provide a high level overview of the system and the interaction between software and hardware to make the autonomous system run.
+It may be overwhelming at first but following the documentation and researching piece by piece will provide you with an indepth, if not,
+at least a general understanding of the various components that work together to make this system run. 
+<br/>
+First, the heart of the software system is ROS. It is a community driven middleware that helps faciliate communication between various Python/C++ 
+programs. ROS makes it easy to import other community solutions to problems such as path planning, object detection, hardware drivers, etc. 
+Watch this series of [videos](https://www.youtube.com/watch?v=OWeLUSzxMsw&list=PLunhqkrRNRhYAffV8JDiFOatQXuU-NnxT) 
+to understand how ROS is used to run a autonomous vehicle, start to finish. 
+**This is a MUST WATCH**. It will save you HOURS of research and confusion.
+<br/>
+Similar to the robot created in the video, we are following essentially doing the same thing with 2 major differences:
+1. Use of IMU/GPS module 
+    - We are using the SBG system's IMU system where both the GPS and the IMU are in one module. 
+2. Custom motor driver
+    - We are using the HDC2460 motor controller which drive our wheel chair motor. The motors do not come with built-in
+    encoders so we are using the CUI Devices AMT encoders to track the position of the wheels.
+<br/>
+The diagram below is a high level overview of the different hardware components and their communication
+![Hardware Component Diagram](/public/Hardware_Interaction_Diagram.png)
+
+<br/>
+This diagram displays the various ROS nodes that will be running in our system. It is hiding a lot of details, espicially in the slam_toolbox and nav2
+components but it provides a general overview.
+![ROS Software Components](/public/Capstone_Package_View.png)
+<br/>
+The last diagram shows the interaction between the hardware and software that we have.
+![Software and Hardware Interaction Diagram](/public/Hardware_Interaction_Diagram.png)
+
+<br/>
+This is a lot to take in when you are just coming in, but take your time and just be consistent. Continue to watch the videos and understand 
+the various major components in ROS that are used and things will start to make sense. Look into the documentation of the libraries that we use 
+like Nav2.
+<br/>
