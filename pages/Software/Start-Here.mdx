@@ -11,12 +11,17 @@ Watch this series of [videos](https://www.youtube.com/watch?v=OWeLUSzxMsw&list=P
 to understand how ROS is used to run a autonomous vehicle, start to finish. 
 **This is a MUST WATCH**. It will save you HOURS of research and confusion.
 <br/>
+Currently, we are working with a capstone team with the software available for view [here](https://github.com/SEG4910-Capstone). 
+The ```ros-workspace``` is the main repository where it pulls in other ros packages like the motor controller drivers and etc. 
+Once the term for the capstone is complete, the documentation and code will be transferred over to the organization repository.
+
 Similar to the robot created in the video, we are following essentially doing the same thing with 2 major differences:
 1. Use of IMU/GPS module 
     - We are using the SBG system's IMU system where both the GPS and the IMU are in one module. 
 2. Custom motor driver
     - We are using the HDC2460 motor controller which drive our wheel chair motor. The motors do not come with built-in
     encoders so we are using the CUI Devices AMT encoders to track the position of the wheels.
+
 <br/>
 The diagram below is a high level overview of the different hardware components and their communication
 ![Hardware Component Diagram](/Hardware_Interaction_Diagram.png)
