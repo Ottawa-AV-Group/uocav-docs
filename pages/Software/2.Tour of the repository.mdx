@@ -1,0 +1,67 @@
+// import Image from 'next/image'
+
+# [ros-workspace repository](https://github.com/SEG4910-Capstone/ros-workspace/)
+In our workspace, you will see that src directory with all the components of our snowplow system.
+![Package screenshot](/Github_1.png)
+
+As you can see there are other packages in the form of submodules in the src directory.
+- [gz_ros2_control](https://github.com/ros-controls/gz_ros2_control/tree/humble)
+    - Package for providing ros2 control functionality to the gazebo simulation. 
+- [motor-controller](https://github.com/SEG4910-Capstone/motor-controller)
+    - Package for providing the communication driver for the HDC2460 motor controller and ros2 control. 
+	This allows for the /cmd_vel coming from either the keyboard, remote control, or autonomous software to be translated
+    to signals that the motor controller can understand
+- [ntrip_client](https://github.com/LORD-MicroStrain/ntrip_client/tree/ros2)
+    - Package for providing RTCM connections and publishing them on a ROS topic.
+    This is required for RTK gps solutions which you can learn more about [here!](https://learn.sparkfun.com/tutorials/what-is-gps-rtk/all#real-time-kinematics)
+- [ouster-ros](https://github.com/ouster-lidar/ouster-ros/tree/ros2)
+    - Package for running the Ouster Lidar. 
+    The company provides us with an open source driver that we can easily use to receive standard ros topics for autonomous navigation
+- [sbg_ros2_driver](https://github.com/SBG-Systems/sbg_ros2_driver/tree/master)
+    - Pacakge for running the SBG Systems Ellipse IMU+GPS.
+    Similar to the lidar, the company provides us with everything to get the information from the imu to topics that other nodes/packages can use
+- snowplow
+    - Package for orchestrating all the other packages and houses the majority of the configuration and physical dimensions.
+    This package will have all the launch files you need to execute to run the simulation and the physical robot. More explaintion os
+    the various launch file will be provided further down.
+- [xbox_remote_control](https://github.com/SEG4910-Capstone/xbox_remote_control/tree/main)
+    - Package responsible for communicating with the ESP32 for remote control signals.
+    The ESP32 is flashed with the code from our [Remote-control-ESP32 repository](https://github.com/uOttawaCAV/Remote-control-ESP32) which
+    connects to our xbox controller. This signals is processed then translated by nodes in this package that can be consumed by ros2_control.
+
+## Digging deeper
+### Launch files
+![Launch file screenshot](/Github_launch.PNG)
+There are a lot of files but this breakdown will make it very easy to see what is happening here. The main focus should be on the distinction
+between the physical and simulation.
+#### Simulation vs Physical
+Simulation is started by ```snowplow_bringup.launch.py```  while physical is ```physical_snowplow_bringup.launch.py```.
+
+![Simulation bringup launch screenshot](/Github_sim_launch.PNG)
+The launch step is broken into 4 components for both the simulation and physical.
+
+- Simulation
+    1. `simulation.launch.py` is responsible setting up the "physical" aspects of
+    robot. This would be spawning the robot in gazebo with the defined dimensions along with the simulated sensors, and ros2_control nodes which
+    is required for moving the robot. 
+    2. `visualization.launch.py` launches rviz with the panels you will need to see what is happening
+    3. `localization.launch.py` starts the nodes related for localization. These are:
+        1. slam_toolbox: For simultaneously mapping and localizing itself based on the visual information it sees through the lidar
+        2. robot localization: This fuses the various different sensor information (Encoder, IMU+GPS) to get a more accurate estimate
+        of the robots movement 
+    4. `navigation.launch.py` starts the nodes required for autonomous navigation. This is where the [nav2](https://docs.nav2.org/) package comes in
+    to handle the complex behaviour. There is still a lot of work to be done and improvements to decision making process, planning algorithm, etc. For
+    future work, this is where majority of the software work will be required unless an overhaul is done to the current architecture.
+- Physical
+    1. This launches the`physical_simulation.launch.py` and starts the drivers required for the physical components of the robot.
+        These are:
+        1. Joystick
+        2. IMU 
+        3. RTK GPS
+        4. Lidar
+        5. ros2 control
+    2. `visualization.launch.py` launches rviz with the panels you will need to see what is happening
+    3. `physical_localization.launch.py` does essentially the same thing as they use the same interfaces. The main difference is the configurations
+    in the yaml files. 
+    4. `physical_navigation.launch.py` similarly copies what the simulation is doing but parameters are changed to work with the physcial robot.
+
