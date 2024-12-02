@@ -1,0 +1,10 @@
+{
+  "Start-Here": {
+    "title": "1. Start Here",
+    "type": "page"
+  },
+  "Tour-of-the-repository": {
+    "title": "2. Tour of the repository",
+    "type": "page"
+  }
+}

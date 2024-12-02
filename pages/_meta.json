@@ -9,5 +9,9 @@
     "type": "page",
     "href": "https://uocav.ca",
     "newWindow": true
+  },
+  "Software": {
+    "title": "Software",
+    "type": "section"
   }
 }
