@@ -1,10 +1,4 @@
-{
-  "Start-Here": {
-    "title": "1. Start Here",
-    "type": "page"
-  },
-  "Tour-of-the-repository": {
-    "title": "2. Tour of the repository",
-    "type": "page"
-  }
+export default {
+  Start-Here: '1. Start Here',
+  Tour-of-the-repository: '2. Tour of the Repository'
 }
