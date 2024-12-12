@@ -1,0 +1,21 @@
+import Image from 'next/image'
+
+## [AMT133Q-V](https://www.sameskydevices.com/product/motion-and-control/rotary-encoders/incremental/modular/amt133q-v)
+### Setup
+[Cable](https://www.sameskydevices.com/product/resource/amt-18c-3-036.pdf)
+![AMT Cable](/AMT_cable.png)
+
+You have to feed the A+ and B+ to the corresponding port in the back of the [HDC2460 motor controller](https://www.roboteq.com/docman-list/motor-controllers-documents-and-files/documentation/datasheets/gen3/60-hdc24xx-datasheet/file)
+
+If you look at the back of the motor controller, you will see this
+![HDC Backports](HDC_whole.png)
+
+![HDC RS232 port](HDC_port.png)
+
+![HDC table](HDC_table.png)
+
+Port 12, 24 will take the A (Brown primary, white secondary) and B (Green primary, white secondary) from the left encoder.
+
+Port 11, 23 will do the same but for the right encoder.
+
+Take the 5v (Red primary, green secondary) and GND (Green primary, red secondary) and insert it into 13 (GND), 25 (5V), 1 (GND), 14 (5V) for each encoder.
