@@ -45,11 +45,11 @@ The launch step is broken into 4 components for both the simulation and physical
     robot. This would be spawning the robot in gazebo with the defined dimensions along with the simulated sensors, and ros2_control nodes which
     is required for moving the robot. 
     2. `visualization.launch.py` launches rviz with the panels you will need to see what is happening
-    3. `localization.launch.py` starts the nodes related for localization. These are:
+    3. `slam_localization.launch.py` starts the nodes related for localization. These are:
         1. slam_toolbox: For simultaneously mapping and localizing itself based on the visual information it sees through the lidar
         2. robot localization: This fuses the various different sensor information (Encoder, IMU+GPS) to get a more accurate estimate
         of the robots movement 
-    4. `navigation.launch.py` starts the nodes required for autonomous navigation. This is where the [nav2](https://docs.nav2.org/) package comes in
+    4. `slam_navigation.launch.py` starts the nodes required for autonomous navigation. This is where the [nav2](https://docs.nav2.org/) package comes in
     to handle the complex behaviour. There is still a lot of work to be done and improvements to decision making process, planning algorithm, etc. For
     future work, this is where majority of the software work will be required unless an overhaul is done to the current architecture.
 - Physical
